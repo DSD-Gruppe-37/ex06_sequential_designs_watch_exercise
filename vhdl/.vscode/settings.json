@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/*.*.rpt": true,
+        "**/*.vhd.*": true
+    }
+}

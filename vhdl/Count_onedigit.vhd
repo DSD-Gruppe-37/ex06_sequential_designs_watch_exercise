@@ -10,38 +10,51 @@ ENTITY Count_onedigit IS
         mode  : IN std_logic_vector(1 DOWNTO 0);
 
         count : OUT std_logic_vector(3 DOWNTO 0);
-        cout  : OUT std_logic;
+        cout  : OUT std_logic
     );
 END ENTITY Count_onedigit;
 ARCHITECTURE structural OF Count_onedigit IS
 
-    SIGNAL intCount : unsigned(3 DOWNTO 0); --- 
+    SIGNAL intCount :
+    unsigned(3 DOWNTO 0); --- 
 
+    SIGNAL maxCount :
+    unsigned(3 DOWNTO 0);
 BEGIN
-    PROCESS (clk, reset)
-        -- -- Mode selector
-        -- CASE(mode) IS
-        -- when "00" => [MAX_] <= "9";
-        -- when "01" => [MAX_] <= "5";
-        -- when OTHERS => [MAX_] <= "2";
-        -- END CASE
+    PROCESS (clk, reset, mode, intCount)
 
     BEGIN
-        IF (rising_edge(clk) THEN
+        IF (rising_edge(clk)) THEN
             intCount <= intCount + 1;
-        ELSIF (reset = '1')
-            intCount = "0000";
+
+            IF (intCount = maxCount) THEN
+
+                IF (mode = "00") THEN
+                    maxCount <= "1001";
+                ELSIF (mode = "01") THEN
+                    maxCount <= "0101";
+                ELSE
+                    maxCount <= "0010";
+                END IF;
+
+                intCount <= (OTHERS => '0');
+
+            END IF;
         END IF;
-    END IF;
 
-    -- -- Set cout to 1 if counter = 0
-    -- CASE(intCount) IS
-    --     WHEN "0000" => cout <= "1"
-    --     WHEN OTHERS => cout <= "0"
-    -- END CASE;
+        IF (reset = '1') THEN
+            intCount <= (OTHERS => '0');
+        END IF;
 
-END PROCESS
+    END PROCESS;
+    count <= std_logic_vector(intCount);
 
-count <= std_logic_vector(intCount);
+    PROCESS (intCount)
+    BEGIN
+        CASE(intCount) IS
+            WHEN "0000" => cout <= '1';
+            WHEN OTHERS => cout <= '1';
+        END CASE;
+    END PROCESS;
 
 END ARCHITECTURE structural;
