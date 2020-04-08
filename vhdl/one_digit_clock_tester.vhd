@@ -20,14 +20,20 @@ ARCHITECTURE structural OF multi_counter_tester IS
     SIGNAL MultiCounterOutput : std_logic_vector(3 DOWNTO 0);
 
 BEGIN
-    MultiCounter : ENTITY Count_onedigit
+
+    ClockGenerator : ENTITY clock_gen
         PORT MAP
+            ();
+
+    MultiCounter : ENTITY Count_onedigit
+        PORT
+        MAP
         (
-            clk               => clk,
-            reset             => reset,
-            mode(1 DOWNTO 0)  => mode(1 DOWNTO 0),
-            count(3 DOWNTO 0) => MultiCounterOutput(3 DOWNTO 0),
-            cout              => cout
+        clk               => clk,
+        reset             => reset,
+        mode(1 DOWNTO 0)  => mode(1 DOWNTO 0),
+        count(3 DOWNTO 0) => MultiCounterOutput(3 DOWNTO 0),
+        cout              => cout
         );
 
     Hexdisplay : ENTITY bin2hex(Behavioral)
