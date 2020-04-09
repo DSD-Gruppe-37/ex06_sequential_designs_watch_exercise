@@ -17,7 +17,7 @@ END ENTITY Count_onedigit;
 -----------------------------------------------------------------
 ARCHITECTURE ourCounter OF Count_onedigit IS
 
-    --- Interne signaler
+    --- Internal signals
     ---- counter - unsigned enables incremental operations
     SIGNAL intCount :
     unsigned(3 DOWNTO 0); --- 
