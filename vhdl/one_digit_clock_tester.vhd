@@ -5,11 +5,17 @@ USE work.ALL;
 ENTITY one_digit_clock_tester IS
     PORT
     (
+        ---- INPUTS
         clk   : IN std_logic;                     -- Clockinput
         mode  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
         reset : IN std_logic;                     -- Reset in // Active low
+<<<<<<< HEAD
         speed : IN std_logic;                     -- Speed selection // Active low
 
+=======
+        speed : IN std_logic;                     -- Speed control // Active low
+        ---- OUTPUTS
+>>>>>>> 92a25a657b90d9ffc96607127e596f75c8508a11
         seg   : OUT std_logic_vector(6 DOWNTO 0); -- Display output
         cout  : OUT std_logic                     -- Carry out
     );

@@ -35,6 +35,7 @@ BEGIN
     HEX6 <= ("1111111");
     HEX7 <= ("1111111");
     --------------------------------------------------
+<<<<<<< HEAD
 
     -- MultiCounterTester : ENTITY multi_counter_tester
     --     PORT MAP
@@ -47,6 +48,9 @@ BEGIN
     --     );
 
     oneDigitClockTester : ENTITY one_digit_clock_tester
+=======
+    MultiCounterTester : ENTITY multi_counter_tester
+>>>>>>> 92a25a657b90d9ffc96607127e596f75c8508a11
         PORT MAP
         (
             cout  => LEDR(0),
@@ -56,4 +60,19 @@ BEGIN
             reset => key(3),
             mode  => SW(17 DOWNTO 16)
         );
+    --------------------------------------------------
+
+    -- --------------------------------------------------
+    -- oneDigitClockTester : ENTITY one_digit_clock_tester
+    --     PORT
+    --     MAP
+    --     (
+    --     cout  => LEDR(0),
+    --     seg   => HEX0,
+    --     clk   => KEY(0),
+    --     reset => key(3),
+    --     mode  => SW(17 DOWNTO 16)
+    --     );
+    -- --------------------------------------------------
+
 END;
