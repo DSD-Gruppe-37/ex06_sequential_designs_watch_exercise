@@ -15,7 +15,7 @@ ENTITY multi_counter_tester IS
     );
 END ENTITY multi_counter_tester;
 
-ARCHITECTURE structural OF multi_counter_tester IS
+ARCHITECTURE testsetup OF multi_counter_tester IS
 
     SIGNAL MultiCounterOutput : std_logic_vector(3 DOWNTO 0);
 
@@ -38,4 +38,4 @@ BEGIN
         sseg(6 DOWNTO 0) => seg(6 DOWNTO 0)
         );
 
-END ARCHITECTURE structural;
+END ARCHITECTURE testsetup;

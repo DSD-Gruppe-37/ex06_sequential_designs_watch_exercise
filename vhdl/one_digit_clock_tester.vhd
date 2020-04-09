@@ -5,10 +5,12 @@ USE work.ALL;
 ENTITY multi_counter_tester IS
     PORT
     (
+        ---- INPUTS
         clk   : IN std_logic;                     -- Clockinput
         mode  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
         reset : IN std_logic;                     -- Reset in // Active low
-
+        speed : IN std_logic;                     -- Speed control // Active low
+        ---- OUTPUTS
         seg   : OUT std_logic_vector(6 DOWNTO 0); -- Display output
         cout  : OUT std_logic                     -- Carry out
 
