@@ -20,7 +20,7 @@ ARCHITECTURE structural OF multi_counter_tester IS
     SIGNAL MultiCounterOutput : std_logic_vector(3 DOWNTO 0);
 
 BEGIN
-    MultiCounter : ENTITY Count_onedigit
+    MultiCounter : ENTITY count_onedigit
         PORT MAP
         (
             clk               => clk,

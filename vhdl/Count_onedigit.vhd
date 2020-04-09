@@ -2,7 +2,7 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 -----------------------------------------------------------------
-ENTITY Count_onedigit IS
+ENTITY count_onedigit IS
     PORT
     (
         --- Inputs
@@ -13,9 +13,9 @@ ENTITY Count_onedigit IS
         count : OUT std_logic_vector(3 DOWNTO 0);
         cout  : OUT std_logic
     );
-END ENTITY Count_onedigit;
+END ENTITY count_onedigit;
 -----------------------------------------------------------------
-ARCHITECTURE ourCounter OF Count_onedigit IS
+ARCHITECTURE ourCounter OF count_onedigit IS
 
     --- Interne signaler
     ---- counter - unsigned enables incremental operations
