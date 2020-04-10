@@ -24,6 +24,10 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL secCarry        : std_logic;
     SIGNAL minCarry        : std_logic;
     SIGNAL ResetSignal     : std_logic;
+    SIGNAL secBinOnes      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL secBinTens      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL minBinOnes      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL minBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL hrsBinOnes      : std_logic_vector(3 DOWNTO 0);
     SIGNAL hrsBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL ClkOut_internal : std_logic;
@@ -51,8 +55,8 @@ BEGIN
         coutOut    => secCarry,
         segOnesOut => sec_1,
         segTensOut => sec_10,
-        countOnes  => OPEN,
-        countTens  => OPEN
+        countOnes  => secBinOnes,
+        countTens  => secBinTens
         );
 
     --- Minutes section
@@ -68,8 +72,8 @@ BEGIN
         coutOut    => minCarry,
         segOnesOut => min_1,
         segTensOut => min_10,
-        countOnes  => OPEN,
-        countTens  => OPEN
+        countOnes  => minBinones,
+        countTens  => minBinTens
 
         );
 
@@ -101,4 +105,6 @@ BEGIN
         -- output
         reset_out => ResetSignal
         );
+
+    --- TM section
 END ARCHITECTURE rtl;

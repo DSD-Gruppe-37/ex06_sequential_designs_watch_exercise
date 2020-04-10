@@ -28,7 +28,7 @@ BEGIN
     BEGIN
         -- speed selection 
         CASE (speed) IS
-            WHEN '0'    => speedSelector    := 1e6; -- 0.5 sec clock
+            WHEN '0'    => speedSelector    := 10e3; -- 0.5 sec clock
             WHEN '1'    => speedSelector    := 50e6; -- 1.0 sec clock
             WHEN OTHERS => speedSelector := 100e6;   -- 2.0  sec clock for errors
         END CASE;

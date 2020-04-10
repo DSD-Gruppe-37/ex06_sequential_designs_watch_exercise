@@ -62,5 +62,5 @@ BEGIN
 
     CountOnes <= displayOnesCount;
     CountTens <= displayTensCount;
-    
+
 END ARCHITECTURE rtl;
