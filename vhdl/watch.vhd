@@ -16,7 +16,7 @@ ENTITY watch IS
         min_10 : OUT std_logic_vector(6 DOWNTO 0);
         hrs_1  : OUT std_logic_vector(6 DOWNTO 0);
         hrs_10 : OUT std_logic_vector(6 DOWNTO 0);
-        tm     : OUT std_logic_vector(15 DOWNTO 8)
+        tm     : OUT std_logic_vector(15 DOWNTO 0)
     );
 END ENTITY watch;
 
