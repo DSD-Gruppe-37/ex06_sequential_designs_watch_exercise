@@ -23,6 +23,9 @@ END ENTITY watch;
 ARCHITECTURE rtl OF watch IS
     SIGNAL secCarry        : std_logic;
     SIGNAL minCarry        : std_logic;
+    SIGNAL ResetSignal     : std_logic;
+    SIGNAL hrsBinOnes      : std_logic_vector(3 DOWNTO 0);
+    SIGNAL hrsBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL ClkOut_internal : std_logic;
 BEGIN
     --- Main clock generator:
@@ -41,13 +44,15 @@ BEGIN
         PORT
         MAP
         (
-        clkIn                  => ClkOut_internal,
-        resetIn                => reset,
-        modeOnes(1 DOWNTO 0)   => "00",
-        modeTens(1 DOWNTO 0)   => "01",
-        coutOut                => secCarry,
-        segOnesOut(6 DOWNTO 0) => sec_1(6 DOWNTO 0),
-        segTensOut(6 DOWNTO 0) => sec_10(6 DOWNTO 0)
+        clkIn      => ClkOut_internal,
+        resetIn    => ResetSignal,
+        modeOnes   => "00",
+        modeTens   => "01",
+        coutOut    => secCarry,
+        segOnesOut => sec_1,
+        segTensOut => sec_10,
+        countOnes  => OPEN,
+        countTens  => OPEN
         );
 
     --- Minutes section
@@ -56,13 +61,16 @@ BEGIN
         PORT
         MAP
         (
-        clkIn                  => secCarry,
-        resetIn                => reset,
-        modeOnes(1 DOWNTO 0)   => "00",
-        modeTens(1 DOWNTO 0)   => "01",
-        coutOut                => minCarry,
-        segOnesOut(6 DOWNTO 0) => min_1(6 DOWNTO 0),
-        segTensOut(6 DOWNTO 0) => min_10(6 DOWNTO 0)
+        clkIn      => secCarry,
+        resetIn    => ResetSignal,
+        modeOnes   => "00",
+        modeTens   => "01",
+        coutOut    => minCarry,
+        segOnesOut => min_1,
+        segTensOut => min_10,
+        countOnes  => OPEN,
+        countTens  => OPEN
+
         );
 
     --- Hrs section
@@ -71,12 +79,26 @@ BEGIN
         PORT
         MAP
         (
-        clkIn                  => minCarry,
-        resetIn                => reset,
-        modeOnes(1 DOWNTO 0)   => "00",
-        modeTens(1 DOWNTO 0)   => "11",
-        coutOut                => OPEN,
-        segOnesOut(6 DOWNTO 0) => hrs_1(6 DOWNTO 0),
-        segTensOut(6 DOWNTO 0) => hrs_10(6 DOWNTO 0)
+        clkIn      => minCarry,
+        resetIn    => ResetSignal,
+        modeOnes   => "00",
+        modeTens   => "11",
+        coutOut    => OPEN,
+        segOnesOut => hrs_1,
+        segTensOut => hrs_10,
+        countOnes  => hrsBinOnes,
+        countTens  => hrsBinTens
+        );
+
+    --- reset logic
+    ResetLogic : ENTITY reset_logic
+        PORT
+        MAP(
+        -- input
+        reset_in  => reset,
+        hrs_bin1  => hrsBinOnes,
+        hrs_bin10 => hrsBinTens,
+        -- output
+        reset_out => ResetSignal
         );
 END ARCHITECTURE rtl;

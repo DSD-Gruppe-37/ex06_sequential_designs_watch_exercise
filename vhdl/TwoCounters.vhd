@@ -9,54 +9,58 @@ ENTITY TwoCounters IS
         modeOnes   : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
         modeTens   : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
         resetIn    : IN std_logic;                     -- Reset in // Active low
-
         segOnesOut : OUT std_logic_vector(6 DOWNTO 0); -- Display output
         segTensOut : OUT std_logic_vector(6 DOWNTO 0); -- Display output
+        countOnes  : OUT std_logic_vector(3 DOWNTO 0); -- Ones binary output
+        countTens  : OUT std_logic_vector(3 DOWNTO 0); -- Tens binary output
         coutOut    : OUT std_logic
     );
 END ENTITY TwoCounters;
 
 ARCHITECTURE rtl OF TwoCounters IS
-    SIGNAL clock_int : std_logic;
-    SIGNAL displayOnesCount : std_logic_vector(3 downto 0) ;
-    SIGNAL displayTensCount : std_logic_vector(3 downto 0) ;
+    SIGNAL clock_int        : std_logic;
+    SIGNAL displayOnesCount : std_logic_vector(3 DOWNTO 0);
+    SIGNAL displayTensCount : std_logic_vector(3 DOWNTO 0);
 BEGIN
     --- count ones
     MultiCounterOnes : ENTITY multi_counter
         PORT MAP
         (
-            clk               => clkIn,
-            reset             => resetIn,
-            mode(1 DOWNTO 0)  => modeOnes(1 DOWNTO 0),
-            count(3 DOWNTO 0) => displayOnesCount(3 DOWNTO 0),
-            cout              => clock_int
+            clk   => clkIn,
+            reset => resetIn,
+            mode  => modeOnes,
+            count => displayOnesCount,
+            cout  => clock_int
         );
     --- count tens    
     MultiCounterTens : ENTITY multi_counter
         PORT
         MAP
         (
-        clk               => clock_int,
-        reset             => resetIn,
-        mode(1 DOWNTO 0)  => modeTens(1 DOWNTO 0),
-        count(3 DOWNTO 0) => displayTensCount(3 DOWNTO 0),
-        cout              => coutOut
+        clk   => clock_int,
+        reset => resetIn,
+        mode  => modeTens,
+        count => displayTensCount,
+        cout  => coutOut
         );
     -- display ones
     HexdisplayOnes : ENTITY bin2hex
         PORT
         MAP
         (
-        bin(3 DOWNTO 0)  => displayOnesCount(3 DOWNTO 0),
-        sseg(6 DOWNTO 0) => segOnesOut(6 DOWNTO 0)
+        bin  => displayOnesCount,
+        sseg => segOnesOut
         );
     -- diplay tens
     HexdisplayTens : ENTITY bin2hex
         PORT
         MAP
         (
-        bin(3 DOWNTO 0)  => displayTensCount(3 DOWNTO 0),
-        sseg(6 DOWNTO 0) => segTensOut(6 DOWNTO 0)
+        bin  => displayTensCount,
+        sseg => segTensOut
         );
 
+    CountOnes <= displayOnesCount;
+    CountTens <= displayTensCount;
+    
 END ARCHITECTURE rtl;
