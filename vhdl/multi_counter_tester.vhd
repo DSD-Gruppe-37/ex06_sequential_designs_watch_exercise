@@ -5,29 +5,29 @@ USE work.ALL;
 ENTITY multi_counter_tester IS
     PORT
     (
-        clk   : IN std_logic;                     -- Clockinput
-        mode  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
-        reset : IN std_logic;                     -- Reset in // Active low
+        clkIn   : IN std_logic;                     -- Clockinput
+        modeIn  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
+        resetIn : IN std_logic;                     -- Reset in // Active low
 
-        seg   : OUT std_logic_vector(6 DOWNTO 0); -- Display output
-        cout  : OUT std_logic                     -- Carry out
+        segOut   : OUT std_logic_vector(6 DOWNTO 0); -- Display output
+        coutOut  : OUT std_logic                     -- Carry out
 
     );
 END ENTITY multi_counter_tester;
 
-ARCHITECTURE testsetup OF multi_counter_tester IS
+ARCHITECTURE testSetup OF multi_counter_tester IS
 
     SIGNAL MultiCounterOutput : std_logic_vector(3 DOWNTO 0);
 
 BEGIN
-    MultiCounter : ENTITY count_onedigit
+    MultiCounter : ENTITY multi_counter
         PORT MAP
         (
-            clk               => clk,
-            reset             => reset,
-            mode(1 DOWNTO 0)  => mode(1 DOWNTO 0),
+            clk               => clkIn,
+            reset             => resetIn,
+            mode(1 DOWNTO 0)  => modeIn(1 DOWNTO 0),
             count(3 DOWNTO 0) => MultiCounterOutput(3 DOWNTO 0),
-            cout              => cout
+            cout              => coutOut
         );
 
     Hexdisplay : ENTITY bin2hex(Behavioral)
@@ -35,7 +35,7 @@ BEGIN
         MAP
         (
         bin(3 DOWNTO 0)  => MultiCounterOutput(3 DOWNTO 0),
-        sseg(6 DOWNTO 0) => seg(6 DOWNTO 0)
+        sseg(6 DOWNTO 0) => segOut(6 DOWNTO 0)
         );
 
 END ARCHITECTURE testsetup;

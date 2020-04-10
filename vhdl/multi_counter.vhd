@@ -2,7 +2,7 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 -----------------------------------------------------------------
-ENTITY count_onedigit IS
+ENTITY multi_counter IS
     PORT
     (
         --- Inputs
@@ -13,9 +13,9 @@ ENTITY count_onedigit IS
         count : OUT std_logic_vector(3 DOWNTO 0);
         cout  : OUT std_logic
     );
-END ENTITY count_onedigit;
+END ENTITY multi_counter;
 -----------------------------------------------------------------
-ARCHITECTURE ourCounter OF count_onedigit IS
+ARCHITECTURE ThreeMode OF multi_counter IS
 
     --- Internal signals
     ---- counter - unsigned enables incremental operations
@@ -63,4 +63,4 @@ BEGIN
     -- casting back to std_logic_vector -- assign count value
     count <= std_logic_vector(intCount);
 
-END ARCHITECTURE ourCounter;
+END ARCHITECTURE ThreeMode;

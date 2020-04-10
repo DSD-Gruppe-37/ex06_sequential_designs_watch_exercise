@@ -1,7 +1,8 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
-
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 ENTITY clock_gen IS
     PORT
     (
@@ -15,45 +16,49 @@ END ENTITY clock_gen;
 ARCHITECTURE ClockDivider OF clock_gen IS
 
     -- Signals to be used:
-    SIGNAL SpeedSelector : INTEGER;
-    SIGNAL ClkDivCount   : unsigned(31 DOWNTO 0) := (OTHERS => '0'); -- For clock divisons.
-    SIGNAL clkCounter    : unsigned(9 DOWNTO 0)  := (OTHERS => '0'); -- Output Counter
-    SIGNAL ClkDiv        : std_logic             := '0';             -- Positive vs negative period
+    SIGNAL ClkDivCounter : std_logic_vector(31 DOWNTO 0) := (OTHERS => '0'); -- For clock divisons.
+    SIGNAL clkCounter    : std_logic_vector(9 DOWNTO 0)  := (OTHERS => '0'); -- Output Counter
+    SIGNAL ClkDiv        : std_logic                     := '0';             -- Positive vs negative period
 
 BEGIN
 
-    ClockDivider : PROCESS (clk, speed, reset)
+    ClockDivMkII : PROCESS (clk, reset)
+        VARIABLE SpeedSelector : INTEGER;
+
     BEGIN
         -- speed selection 
         CASE (speed) IS
-            WHEN '1'    => speedSelector    <= 100e6;
-            WHEN '0'    => speedSelector    <= 50e6;
-            WHEN OTHERS => speedSelector <= 100e6;
+            WHEN '0'    => speedSelector    := 1e6; -- 0.5 sec clock
+            WHEN '1'    => speedSelector    := 50e6; -- 1.0 sec clock
+            WHEN OTHERS => speedSelector := 100e6;   -- 2.0  sec clock for errors
         END CASE;
 
-        -- Timing setup
+        -- reset on speed limit
         IF rising_edge(clk) THEN
-            IF (to_integer(unsigned(ClkDivCount)) >= speedSelector) THEN -- 50MHz / 50e6 = 1Hz ? 50MHz / 100e6 = 0.5Hz ?  
-                ClkDivCount <= (OTHERS => '0');                              -- reset input
-                ClkDiv      <= '1';                                          -- enable clock coutput
-            END IF;
-        ELSE
-            ClkDivCount <= ClkDivCount + 1; -- increase counter -
-            ClkDiv      <= '0';             -- set clock ability to 0 
-        END IF;
 
-        -- Clocking part
+            IF (ClkDivCounter >= speedSelector) THEN --50MHz clock counting to sel. speed.
+                ClkDivCounter <= (OTHERS => '0');        --Reset clock when limit is reached.
+                ClkDiv        <= '1';                    --Set output hi
+            ELSE
+                ClkDivCounter <= ClkDivCounter + 1; --Increment - else keep counting
+                ClkDiv        <= '0';               -- with a low output
+            END IF;
+
+        END IF;
+        -- clock'er
         IF rising_edge(clk) THEN
-            IF (ClkDiv <= '1') THEN
-                clkCounter <= clkCounter + 1; -- Increase clock
+
+            IF (ClkDiv = '1') THEN        -- when clockout is high:
+                clkCounter <= clkCounter + 1; --Increment the output counter! 
             END IF;
+
+            --hard reset
+        ELSIF (reset = '0' OR ClkDiv='1') THEN
+            ClkDivCounter <= (OTHERS => '0'); -- reset counter to 0..
+            ClkDiv        <= '0';             -- with a low output
         END IF;
 
-        -- reset part
-        IF (reset = '0') THEN
-            ClkDivCount <= (OTHERS => '0');
-        END IF;
+    END PROCESS;
 
-    END PROCESS ClockDivider;
     clk_out <= ClkDiv;
 END ARCHITECTURE ClockDivider;
