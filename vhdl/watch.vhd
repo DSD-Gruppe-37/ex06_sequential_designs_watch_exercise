@@ -32,6 +32,7 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL hrsBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL ClkOut_internal : std_logic;
 BEGIN
+
     --- Main clock generator:
     ClockGenerator : ENTITY clock_gen
         PORT MAP
