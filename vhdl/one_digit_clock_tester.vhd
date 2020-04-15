@@ -27,7 +27,7 @@ BEGIN
         PORT MAP
             ();
 
-    MultiCounter : ENTITY Count_onedigit
+    MultiCounter : ENTITY multi_counter
         PORT
         MAP
         (
