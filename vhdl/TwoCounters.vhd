@@ -23,7 +23,7 @@ ARCHITECTURE rtl OF TwoCounters IS
     SIGNAL displayTensCount : std_logic_vector(3 DOWNTO 0);
 BEGIN
     --- count ones
-    MultiCounterOnes : ENTITY multi_counter
+    MultiCounterOnes : ENTITY multi_counter(ThreeMode)
         PORT MAP
         (
             clk   => clkIn,
@@ -33,7 +33,7 @@ BEGIN
             cout  => clock_int
         );
     --- count tens    
-    MultiCounterTens : ENTITY multi_counter
+    MultiCounterTens : ENTITY multi_counter(ThreeMode)
         PORT
         MAP
         (

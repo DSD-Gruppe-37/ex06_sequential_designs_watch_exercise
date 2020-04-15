@@ -23,5 +23,4 @@ BEGIN
             reset_out <= '1';
         END IF;
     END PROCESS twentyFourReset;
-
 END ARCHITECTURE rtl;

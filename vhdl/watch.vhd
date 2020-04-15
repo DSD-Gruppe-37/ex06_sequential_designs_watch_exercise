@@ -34,11 +34,11 @@ ARCHITECTURE rtl OF watch IS
 BEGIN
 
     --- Main clock generator:
-    ClockGenerator : ENTITY clock_gen
+    ClockGenerator : ENTITY clock_gen(behaviour)
         PORT MAP
         (
             clk     => clk,
-            reset   => reset,
+            reset   => ResetSignal,
             speed   => speed,
             clk_Out => ClkOut_internal
         );
@@ -73,7 +73,7 @@ BEGIN
         coutOut    => minCarry,
         segOnesOut => min_1,
         segTensOut => min_10,
-        countOnes  => minBinones,
+        countOnes  => minBinOnes,
         countTens  => minBinTens
 
         );
