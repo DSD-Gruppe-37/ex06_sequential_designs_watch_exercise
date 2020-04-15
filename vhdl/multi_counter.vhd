@@ -15,7 +15,7 @@ ENTITY multi_counter IS
     );
 END ENTITY multi_counter;
 -----------------------------------------------------------------
-ARCHITECTURE ourCounter OF multi_counter IS
+ARCHITECTURE ThreeMode OF multi_counter IS
 
     --- Internal signals
     ---- counter - unsigned enables incremental operations
@@ -63,4 +63,4 @@ BEGIN
     -- casting back to std_logic_vector -- assign count value
     count <= std_logic_vector(intCount);
 
-END ARCHITECTURE ourCounter;
+END ARCHITECTURE ThreeMode;
