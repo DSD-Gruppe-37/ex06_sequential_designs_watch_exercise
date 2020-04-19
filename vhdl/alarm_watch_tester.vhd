@@ -17,31 +17,31 @@ ENTITY alarm_watch_tester IS
         view      : IN std_logic;
         --outputs
         alarm     : OUT std_logic;
-        HEX02     : OUT std_logic_vector(6 DOWNTOs 0); --!
-        HEX03     : OUT std_logic_vector(6 DOWNTOs 0); --!
-        HEX04     : OUT std_logic_vector(6 DOWNTOs 0); --!
-        HEX05     : OUT std_logic_vector(6 DOWNTOs 0); --!
-        HEX06     : OUT std_logic_vector(6 DOWNTOs 0); --!
-        HEX07     : OUT std_logic_vector(6 DOWNTOs 0); --!
+        HEX02     : OUT std_logic_vector(6 DOWNTO 0); --!
+        HEX03     : OUT std_logic_vector(6 DOWNTO 0); --!
+        HEX04     : OUT std_logic_vector(6 DOWNTO 0); --!
+        HEX05     : OUT std_logic_vector(6 DOWNTO 0); --!
+        HEX06     : OUT std_logic_vector(6 DOWNTO 0); --!
+        HEX07     : OUT std_logic_vector(6 DOWNTO 0)  --!
     );
 END ENTITY alarm_watch_tester;
 
 ARCHITECTURE rtl OF alarm_watch_tester IS
 
     -- to mux
-    SIGNAL mux_a_1 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_a_2 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_a_3 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_a_4 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_a_5 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_a_6 : std_logic_vector(6 DOWNTO 0) :
+    SIGNAL mux_a_1         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_a_2         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_a_3         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_a_4         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_a_5         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_a_6         : std_logic_vector(6 DOWNTO 0);
 
-    SIGNAL mux_b_1 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_b_2 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_b_3 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_b_4 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_b_5 : std_logic_vector(6 DOWNTO 0) :
-    SIGNAL mux_b_6 : std_logic_vector(6 DOWNTO 0) :
+    SIGNAL mux_b_1         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_b_2         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_b_3         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_b_4         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_b_5         : std_logic_vector(6 DOWNTO 0);
+    SIGNAL mux_b_6         : std_logic_vector(6 DOWNTO 0);
     --  tm signals
     SIGNAL tmSignal        : std_logic_vector(15 DOWNTO 0);
     SIGNAL timeAlarmSignal : std_logic_vector(15 DOWNTO 0);
@@ -70,30 +70,30 @@ BEGIN
         PORT
         MAP(
         -- selector
-        view => view;
+        view => view,
         -- inputs
         -- Select A 
-        a1   => mux_a_1;
-        a2   => mux_a_2;
-        a3   => mux_a_3;
-        a4   => mux_a_4;
-        a5   => mux_a_5;
-        a6   => mux_a_6;
+        a1   => "1111111",
+        a2   => "1111111",
+        a3   => mux_a_3,
+        a4   => mux_a_4,
+        a5   => mux_a_5,
+        a6   => mux_a_6,
         -- Select B
-        b1   => mux_b_0;
-        b2   => mux_b_1;
-        b3   => mux_b_2;
-        b4   => mux_b_3;
-        b5   => mux_b_4;
-        b6   => mux_b_5;
+        b1   => mux_b_1,
+        b2   => mux_b_2,
+        b3   => mux_b_3,
+        b4   => mux_b_4,
+        b5   => mux_b_5,
+        b6   => mux_b_6,
         ----
         -- outputs
-        o1   => HEX01;
-        o2   => HEX02;
-        o3   => HEX03;
-        o4   => HEX04;
-        o5   => HEX05;
-        o6   => HEX06;
+        o1   => HEX02,
+        o2   => HEX03,
+        o3   => HEX04,
+        o4   => HEX05,
+        o5   => HEX06,
+        o6   => HEX07
         );
 
     --------------------------------------------------
@@ -131,10 +131,10 @@ BEGIN
         -- input 
         bin    => timeAlarmSignal,
         -- output
-        min_1  => mux_a_3
-        min_10 => mux_a_4
-        hrs_1  => mux_a_5
+        min_1  => mux_a_3,
+        min_10 => mux_a_4,
+        hrs_1  => mux_a_5,
         hrs_10 => mux_a_6
-        )
-        --------------------------------------------------
-    END ARCHITECTURE rtl;
+        );
+    --------------------------------------------------
+END ARCHITECTURE rtl;

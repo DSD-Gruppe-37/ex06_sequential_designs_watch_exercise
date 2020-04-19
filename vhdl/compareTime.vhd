@@ -20,9 +20,9 @@ BEGIN
     Comparison : PROCESS (tm_watch, tm_alarm)
     BEGIN
         IF (tm_watch = tm_alarm) THEN
-            alarm <= '1'''
-                ELSE
-                alarm <= '0';
+            alarm <= '1';
+        ELSE
+            alarm <= '0';
         END IF;
     END PROCESS Comparison;
 

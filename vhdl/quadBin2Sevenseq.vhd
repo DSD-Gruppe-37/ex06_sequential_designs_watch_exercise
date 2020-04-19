@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
+USE work.ALL;
 
 ENTITY quadBin2Sevenseq IS
     PORT
@@ -8,10 +9,10 @@ ENTITY quadBin2Sevenseq IS
         -- inputs
         bin    : IN std_logic_vector(15 DOWNTO 0);
         -- outputs
-        min_1  : std_logic_vector(6 DOWNTO 0);
-        min_10 : std_logic_vector(6 DOWNTO 0);
-        hrs_1  : std_logic_vector(6 DOWNTO 0);
-        hrs_10 : std_logic_vector(6 DOWNTO 0)
+        min_1  : OUT std_logic_vector(6 DOWNTO 0);
+        min_10 : OUT std_logic_vector(6 DOWNTO 0);
+        hrs_1  : OUT std_logic_vector(6 DOWNTO 0);
+        hrs_10 : OUT std_logic_vector(6 DOWNTO 0)
     );
 END ENTITY quadBin2Sevenseq;
 
@@ -37,7 +38,7 @@ BEGIN
         );
     --- Hours
     -- display ones
-    HexdisplayMinOnes : ENTITY bin2hex
+    HexdisplayHoursOnes : ENTITY bin2hex
         PORT
         MAP
         (
@@ -45,7 +46,7 @@ BEGIN
         sseg => hrs_1
         );
     -- diplay tens
-    HexdisplayMinTens : ENTITY bin2hex
+    HexdisplayHoursTens : ENTITY bin2hex
         PORT
         MAP
         (
