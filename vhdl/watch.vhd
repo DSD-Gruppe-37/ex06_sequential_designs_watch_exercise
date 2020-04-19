@@ -34,7 +34,7 @@ ARCHITECTURE rtl OF watch IS
 BEGIN
 
     --- Main clock generator:
-    ClockGenerator : ENTITY clock_gen(behaviour)
+    ClockGenerator : ENTITY clock_gen(ClockDivider)
         PORT MAP
         (
             clk     => clk,
