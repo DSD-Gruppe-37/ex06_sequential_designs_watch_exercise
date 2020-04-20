@@ -25,8 +25,6 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL secCarry        : std_logic;
     SIGNAL minCarry        : std_logic;
     SIGNAL ResetSignal     : std_logic;
-    SIGNAL secBinOnes      : std_logic_vector(3 DOWNTO 0);
-    SIGNAL secBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL minBinOnes      : std_logic_vector(3 DOWNTO 0);
     SIGNAL minBinTens      : std_logic_vector(3 DOWNTO 0);
     SIGNAL hrsBinOnes      : std_logic_vector(3 DOWNTO 0);
@@ -34,7 +32,7 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL ClkOut_internal : std_logic;
 BEGIN
 
-    --- Main clock generator:
+    --- Main clock:
     ClockGenerator : ENTITY clock_gen
         PORT MAP
         (
@@ -44,8 +42,7 @@ BEGIN
             clk_Out => ClkOut_internal
         );
 
-    --- Seconds section
-
+    --- Seconds counter
     DualSecCounter : ENTITY TwoCounters
         PORT
         MAP
@@ -57,12 +54,11 @@ BEGIN
         coutOut    => secCarry,
         segOnesOut => sec_1,
         segTensOut => sec_10,
-        countOnes  => secBinOnes,
-        countTens  => secBinTens
+        countOnes  => OPEN,
+        countTens  => OPEN
         );
 
-    --- Minutes section
-
+    --- Minutes counter
     DualMinCounter : ENTITY TwoCounters
         PORT
         MAP
@@ -79,8 +75,7 @@ BEGIN
 
         );
 
-    --- Hrs section
-
+    --- Hrs counter
     DualHrsCounter : ENTITY TwoCounters
         PORT
         MAP
@@ -108,7 +103,6 @@ BEGIN
         reset_out => ResetSignal
         );
 
-    --- TM section
-
+    --- tm section
     tm <= (hrsBinTens & hrsBinOnes & minBinTens & minBinOnes);
 END ARCHITECTURE rtl;

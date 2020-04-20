@@ -45,6 +45,7 @@ ARCHITECTURE rtl OF alarm_watch_tester IS
     --  tm signals
     SIGNAL tmSignal        : std_logic_vector(15 DOWNTO 0);
     SIGNAL timeAlarmSignal : std_logic_vector(15 DOWNTO 0);
+
 BEGIN
     ----------------------------------------------------
     mainWatch : ENTITY watch
@@ -64,8 +65,6 @@ BEGIN
             tm     => tmSignal
         );
     --------------------------------------------------
-    --------------------------------------------------
-
     SelectorMux : ENTITY mux
         PORT
         MAP(
@@ -122,7 +121,7 @@ BEGIN
         -- output
         alarm    => alarm
         );
-    --------------------------------------------------
+    --------------------------------------------------  
     --------------------------------------------------
     quadDisplay : ENTITY quadBin2Sevenseq
         PORT
