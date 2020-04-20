@@ -17,6 +17,7 @@ ENTITY alarm_watch_tester IS
         view      : IN std_logic;
         --outputs
         alarm     : OUT std_logic;
+        buzzer    : OUT std_logic;
         HEX02     : OUT std_logic_vector(6 DOWNTO 0); --!
         HEX03     : OUT std_logic_vector(6 DOWNTO 0); --!
         HEX04     : OUT std_logic_vector(6 DOWNTO 0); --!
@@ -45,6 +46,7 @@ ARCHITECTURE rtl OF alarm_watch_tester IS
     --  tm signals
     SIGNAL tmSignal        : std_logic_vector(15 DOWNTO 0);
     SIGNAL timeAlarmSignal : std_logic_vector(15 DOWNTO 0);
+
 BEGIN
     ----------------------------------------------------
     mainWatch : ENTITY watch
@@ -121,6 +123,19 @@ BEGIN
         tm_alarm => timeAlarmSignal,
         -- output
         alarm    => alarm
+        );
+    --------------------------------------------------  
+    --------------------------------------------------
+    BuzzModule : ENTITY buzzing
+        PORT
+        MAP
+        (
+        -- input
+        tm_watch => tmSignal,
+        tm_alarm => timeAlarmSignal,
+        clk      => clk,
+        -- output
+        buzzer   => buzzer
         );
     --------------------------------------------------
     --------------------------------------------------

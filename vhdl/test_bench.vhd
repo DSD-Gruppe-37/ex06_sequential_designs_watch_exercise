@@ -18,7 +18,8 @@ ENTITY test_bench IS
         HEX5     : OUT std_logic_vector(6 DOWNTO 0);
         HEX6     : OUT std_logic_vector(6 DOWNTO 0);
         HEX7     : OUT std_logic_vector(6 DOWNTO 0);
-        LEDR     : OUT std_logic_vector(6 DOWNTO 0)
+        LEDR     : OUT std_logic_vector(6 DOWNTO 0);
+        GPIO_0   : OUT std_logic_vector(35 DOWNTO 0)
     );
 END;
 
@@ -93,6 +94,7 @@ BEGIN
             view      => KEY(2),
             --outputs
             alarm     => LEDR(0),
+            buzzer    => GPIO_0(0),
             HEX02     => HEX2,
             HEX03     => HEX3,
             HEX04     => HEX4,

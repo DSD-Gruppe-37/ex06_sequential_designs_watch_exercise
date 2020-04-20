@@ -1,16 +1,16 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
-USE IEEE.numeric_std.ALL;
 USE work.ALL;
 ENTITY multi_counter_tester IS
     PORT
     (
+        -- inputs
         clkIn   : IN std_logic;                     -- Clockinput
         modeIn  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
         resetIn : IN std_logic;                     -- Reset in // Active low
-
-        segOut   : OUT std_logic_vector(6 DOWNTO 0); -- Display output
-        coutOut  : OUT std_logic                     -- Carry out
+        -- outputs
+        segOut  : OUT std_logic_vector(6 DOWNTO 0); -- Display output
+        coutOut : OUT std_logic                     -- Carry out
 
     );
 END ENTITY multi_counter_tester;

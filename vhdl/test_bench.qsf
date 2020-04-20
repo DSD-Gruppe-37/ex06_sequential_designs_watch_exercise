@@ -480,6 +480,7 @@ set_global_assignment -name SIMULATION_MODE TIMING
 set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "C:/DSD/ex06_sequential_designs_watch_exercise/vhdl/funtionalWatchTiming.vwf"
 
+set_global_assignment -name VHDL_FILE buzzing.vhd
 set_global_assignment -name VHDL_FILE clock_gen.vhd
 set_global_assignment -name VHDL_FILE quadBin2Sevenseq.vhd
 set_global_assignment -name VHDL_FILE mux.vhd
