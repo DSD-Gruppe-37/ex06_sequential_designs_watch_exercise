@@ -3,13 +3,12 @@ USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 USE work.ALL;
 ENTITY one_digit_clock_tester IS
-    PORT
-    (
+    PORT (
         ---- INPUTS
-        clkIn   : IN std_logic;                     -- Clockinput
-        modeIn  : IN std_logic_vector(1 DOWNTO 0);  -- Mode select
-        resetIn : IN std_logic;                     -- Reset in // Active low
-        speedIn : IN std_logic;                     -- Speed selection // Active low
+        clkIn   : IN std_logic;                    -- Clockinput
+        modeIn  : IN std_logic_vector(1 DOWNTO 0); -- Mode select
+        resetIn : IN std_logic;                    -- Reset in // Active low
+        speedIn : IN std_logic;                    -- Speed selection // Active low
 
         segOut  : OUT std_logic_vector(6 DOWNTO 0); -- Display output
         coutOut : OUT std_logic                     -- Carry out -- / Sequence complete
@@ -33,22 +32,20 @@ BEGIN
         );
 
     MultiCounter : ENTITY multi_counter
-        PORT
-        MAP
+        PORT MAP
         (
-        clk               => ClkOut_internal,
-        reset             => resetIn,
-        mode(1 DOWNTO 0)  => modeIn(1 DOWNTO 0),
-        count(3 DOWNTO 0) => MultiCounterOutput(3 DOWNTO 0),
-        cout              => coutOut
+            clk   => ClkOut_internal,
+            reset => resetIn,
+            mode  => modeIn,
+            count => MultiCounterOutput,
+            cout  => coutOut
         );
 
     Hexdisplay : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin(3 DOWNTO 0)  => MultiCounterOutput(3 DOWNTO 0),
-        sseg(6 DOWNTO 0) => segOut(6 DOWNTO 0)
+            bin => MultiCounterOutput,
+            seg => segOut
         );
 
 END ARCHITECTURE TestSetup;
