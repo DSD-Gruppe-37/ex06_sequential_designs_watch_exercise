@@ -37,19 +37,6 @@ BEGIN
     -- HEX7 <= ("1111111");
     --------------------------------------------------
 
-    -- oneDigitClockTester : ENTITY one_digit_clock_tester
-    --     PORT MAP
-    --     (
-    --         ---- Input
-    --         clkIn   => CLOCK_50,
-    --         speedIn => key(0),
-    --         resetIn => key(3),
-    --         modeIn  => SW(17 DOWNTO 16),
-    --         ---- Output
-    --         coutOut => LEDR(0),
-    --         segOut  => HEX0
-    --     );
-    -- --------------------------------------------------
     -- watchTester : ENTITY watch
     --     PORT MAP
     --     (

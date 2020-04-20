@@ -4,15 +4,10 @@ USE work.ALL;
 
 ENTITY multi_counter_tester IS
     PORT (
-        SW  : IN std_logic_vector(17 DOWNTO 0);
-        KEY : IN std_logic_vector(3 DOWNTO 0);
-        HEX0,
-        HEX1,
-        HEX2,
-        HEX3,
-        HEX4 : OUT std_logic_vector(6 DOWNTO 0);
-        LEDR : OUT std_logic_vector(3 DOWNTO 0);
-        LEDG : OUT std_logic_vector(5 DOWNTO 0)
+        SW   : IN std_logic_vector(17 DOWNTO 16);
+        KEY  : IN std_logic_vector(3 DOWNTO 0);
+        HEX0 : OUT std_logic_vector(6 DOWNTO 0);
+        LEDR : OUT std_logic_vector(3 DOWNTO 0)
     );
 END ENTITY multi_counter_tester;
 
@@ -23,7 +18,7 @@ BEGIN
         PORT MAP
         (
             clk   => KEY(0),
-            mode  => SW(17 DOWNTO 16),
+            mode  => SW,
             reset => KEY(3),
             count => countOut,
             cout  => LEDR(0)
