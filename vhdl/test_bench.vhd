@@ -35,25 +35,6 @@ BEGIN
     -- HEX5 <= ("1111111");
     -- HEX6 <= ("1111111");
     -- HEX7 <= ("1111111");
-    --------------------------------------------------
-
-    -- watchTester : ENTITY watch
-    --     PORT MAP
-    --     (
-    --         ---- Input
-    --         clk    => CLOCK_50,
-    --         speed  => key(0),
-    --         reset  => key(3),
-    --         ---- Output
-    --         sec_1  => HEX2,
-    --         sec_10 => HEX3,
-    --         min_1  => HEX4,
-    --         min_10 => HEX5,
-    --         hrs_1  => HEX6,
-    --         hrs_10 => HEX7,
-    --         tm     => OPEN
-    --     );
-    -- --------------------------------------------------
 
     --------------------------------------------------
     AlarmWatch : ENTITY alarm_watch_tester
