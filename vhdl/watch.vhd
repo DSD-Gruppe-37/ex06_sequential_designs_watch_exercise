@@ -4,18 +4,15 @@ USE IEEE.numeric_std.ALL;
 USE work.ALL;
 
 ENTITY watch IS
-    PORT
-    (
-        --inputs
-        clk    : IN std_logic;
-        reset  : IN std_logic;
-        speed  : IN std_logic;
-        -- outputs
-        sec_1  : OUT std_logic_vector(6 DOWNTO 0);
-        sec_10 : OUT std_logic_vector(6 DOWNTO 0);
-        min_1  : OUT std_logic_vector(6 DOWNTO 0);
-        min_10 : OUT std_logic_vector(6 DOWNTO 0);
-        hrs_1  : OUT std_logic_vector(6 DOWNTO 0);
+    PORT (
+        -- INPUTS
+        clk, reset, speed : IN std_logic;
+        -- OUTPUTS
+        sec_1,
+        sec_10,
+        min_1,
+        min_10,
+        hrs_1,
         hrs_10 : OUT std_logic_vector(6 DOWNTO 0);
         tm     : OUT std_logic_vector(15 DOWNTO 0)
     );
@@ -32,7 +29,11 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL ClkOut_internal : std_logic;
 BEGIN
 
+<<<<<<< HEAD
     --- Main clock:
+=======
+    -- Main clock generator:
+>>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
     ClockGenerator : ENTITY clock_gen
         PORT MAP
         (
@@ -42,10 +43,13 @@ BEGIN
             clk_Out => ClkOut_internal
         );
 
+<<<<<<< HEAD
     --- Seconds counter
+=======
+    -- Seconds counters
+>>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
     DualSecCounter : ENTITY TwoCounters
-        PORT
-        MAP
+        PORT MAP
         (
         clkIn      => ClkOut_internal,
         resetIn    => ResetSignal,
@@ -60,49 +64,47 @@ BEGIN
 
     --- Minutes counter
     DualMinCounter : ENTITY TwoCounters
-        PORT
-        MAP
+        PORT MAP
         (
-        clkIn      => secCarry,
-        resetIn    => ResetSignal,
-        modeOnes   => "00",
-        modeTens   => "01",
-        coutOut    => minCarry,
-        segOnesOut => min_1,
-        segTensOut => min_10,
-        countOnes  => minBinOnes,
-        countTens  => minBinTens
+            clkIn      => secCarry,
+            resetIn    => ResetSignal,
+            modeOnes   => "00",
+            modeTens   => "01",
+            coutOut    => minCarry,
+            segOnesOut => min_1,
+            segTensOut => min_10,
+            countOnes  => minBinOnes,
+            countTens  => minBinTens
 
         );
 
     --- Hrs counter
     DualHrsCounter : ENTITY TwoCounters
-        PORT
-        MAP
+        PORT MAP
         (
-        clkIn      => minCarry,
-        resetIn    => ResetSignal,
-        modeOnes   => "00",
-        modeTens   => "11",
-        coutOut    => OPEN,
-        segOnesOut => hrs_1,
-        segTensOut => hrs_10,
-        countOnes  => hrsBinOnes,
-        countTens  => hrsBinTens
+            clkIn      => minCarry,
+            resetIn    => ResetSignal,
+            modeOnes   => "00",
+            modeTens   => "11",
+            coutOut    => OPEN,
+            segOnesOut => hrs_1,
+            segTensOut => hrs_10,
+            countOnes  => hrsBinOnes,
+            countTens  => hrsBinTens
         );
 
-    --- reset logic
+    -- Reset logic
     ResetLogic : ENTITY reset_logic
-        PORT
-        MAP(
-        -- input
-        reset_in  => reset,
-        hrs_bin1  => hrsBinOnes,
-        hrs_bin10 => hrsBinTens,
-        -- output
-        reset_out => ResetSignal
+        PORT MAP(
+            -- input
+            reset_in  => reset,
+            hrs_bin1  => hrsBinOnes,
+            hrs_bin10 => hrsBinTens,
+            -- output
+            reset_out => ResetSignal
         );
 
     --- tm section
     tm <= (hrsBinTens & hrsBinOnes & minBinTens & minBinOnes);
+
 END ARCHITECTURE rtl;

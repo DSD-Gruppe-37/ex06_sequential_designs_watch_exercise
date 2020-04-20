@@ -1,10 +1,9 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
------------------------------------------------------------------
+
 ENTITY multi_counter IS
-    PORT
-    (
+    PORT (
         --- Inputs
         clk   : IN std_logic;
         reset : IN std_logic;
@@ -14,7 +13,6 @@ ENTITY multi_counter IS
         cout  : OUT std_logic
     );
 END ENTITY multi_counter;
------------------------------------------------------------------
 
 ARCHITECTURE ThreeMode OF multi_counter IS
     SIGNAL internal_count : unsigned(3 DOWNTO 0) := "0000";
@@ -29,13 +27,13 @@ BEGIN
         ELSIF rising_edge(clk) THEN
             -- set the maximum counter value
             CASE mode IS
-                    WHEN "00"   => maxValue   := to_unsigned(10, maxValue'length);
-                    WHEN "01"   => maxValue   := to_unsigned(6, maxValue'length);
-                    WHEN OTHERS => maxValue := to_unsigned(3 , maxValue'length);
+                WHEN "00"   => maxValue   := to_unsigned(9, maxValue'length);
+                WHEN "01"   => maxValue   := to_unsigned(5, maxValue'length);
+                WHEN OTHERS => maxValue := to_unsigned(2, maxValue'length);
             END CASE;
 
             -- update counter
-            IF (internal_count + 1) >= maxValue THEN
+            IF (internal_count + 1) > maxValue THEN
                 internal_count <= "0000";
                 cout           <= '1';
             ELSE

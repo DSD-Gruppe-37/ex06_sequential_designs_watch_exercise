@@ -15,8 +15,7 @@ USE WORK.ALL;
 
 --! 
 ENTITY TwoCounters IS
-    PORT
-    (
+    PORT (
         clkIn      : IN std_logic;                     --! Clockinput
         modeOnes   : IN std_logic_vector(1 DOWNTO 0);  --! Mode select
         modeTens   : IN std_logic_vector(1 DOWNTO 0);  --! Mode select
@@ -49,30 +48,27 @@ BEGIN
         );
     --- count tens    
     MultiCounterTens : ENTITY multi_counter(ThreeMode)
-        PORT
-        MAP
+        PORT MAP
         (
-        clk   => clock_int,
-        reset => resetIn,
-        mode  => modeTens,
-        count => displayTensCount,
-        cout  => coutOut
+            clk   => clock_int,
+            reset => resetIn,
+            mode  => modeTens,
+            count => displayTensCount,
+            cout  => coutOut
         );
     -- display ones
     HexdisplayOnes : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin  => displayOnesCount,
-        sseg => segOnesOut
+            bin => displayOnesCount,
+            seg => segOnesOut
         );
     -- diplay tens
     HexdisplayTens : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin  => displayTensCount,
-        sseg => segTensOut
+            bin => displayTensCount,
+            seg => segTensOut
         );
 
     CountOnes <= displayOnesCount;

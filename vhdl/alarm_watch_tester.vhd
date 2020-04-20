@@ -17,6 +17,7 @@ ENTITY alarm_watch_tester IS
         view      : IN std_logic;
         --outputs
         alarm     : OUT std_logic;
+        buzzer    : OUT std_logic;
         HEX02     : OUT std_logic_vector(6 DOWNTO 0); --!
         HEX03     : OUT std_logic_vector(6 DOWNTO 0); --!
         HEX04     : OUT std_logic_vector(6 DOWNTO 0); --!

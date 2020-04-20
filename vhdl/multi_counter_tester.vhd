@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE work.ALL;
+<<<<<<< HEAD
 ENTITY multi_counter_tester IS
     PORT
     (
@@ -11,31 +12,34 @@ ENTITY multi_counter_tester IS
         -- outputs
         segOut  : OUT std_logic_vector(6 DOWNTO 0); -- Display output
         coutOut : OUT std_logic                     -- Carry out
+=======
+>>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
 
+ENTITY multi_counter_tester IS
+    PORT (
+        SW   : IN std_logic_vector(17 DOWNTO 16);
+        KEY  : IN std_logic_vector(3 DOWNTO 0);
+        HEX0 : OUT std_logic_vector(6 DOWNTO 0);
+        LEDR : OUT std_logic_vector(3 DOWNTO 0)
     );
 END ENTITY multi_counter_tester;
 
-ARCHITECTURE testSetup OF multi_counter_tester IS
-
-    SIGNAL MultiCounterOutput : std_logic_vector(3 DOWNTO 0);
-
+ARCHITECTURE testbench OF multi_counter_tester IS
+    SIGNAL countOut : std_logic_vector(3 DOWNTO 0);
 BEGIN
-    MultiCounter : ENTITY multi_counter
+    uut0 : ENTITY multi_counter
         PORT MAP
         (
-            clk               => clkIn,
-            reset             => resetIn,
-            mode(1 DOWNTO 0)  => modeIn(1 DOWNTO 0),
-            count(3 DOWNTO 0) => MultiCounterOutput(3 DOWNTO 0),
-            cout              => coutOut
+            clk   => KEY(0),
+            mode  => SW,
+            reset => KEY(3),
+            count => countOut,
+            cout  => LEDR(0)
         );
-
-    Hexdisplay : ENTITY bin2hex(Behavioral)
-        PORT
-        MAP
+    uut1 : ENTITY bin2sevenseg
+        PORT MAP
         (
-        bin(3 DOWNTO 0)  => MultiCounterOutput(3 DOWNTO 0),
-        sseg(6 DOWNTO 0) => segOut(6 DOWNTO 0)
+            bin => countOut,
+            seg => HEX0
         );
-
-END ARCHITECTURE testsetup;
+END ARCHITECTURE;
