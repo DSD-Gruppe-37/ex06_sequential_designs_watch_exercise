@@ -2,6 +2,7 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 USE work.ALL;
+
 ENTITY watch IS
     PORT
     (
@@ -34,7 +35,7 @@ ARCHITECTURE rtl OF watch IS
 BEGIN
 
     --- Main clock generator:
-    ClockGenerator : ENTITY clock_gen(behaviour)
+    ClockGenerator : ENTITY clock_gen
         PORT MAP
         (
             clk     => clk,
@@ -108,4 +109,6 @@ BEGIN
         );
 
     --- TM section
+
+    tm <= (hrsBinTens & hrsBinOnes & minBinTens & minBinOnes);
 END ARCHITECTURE rtl;

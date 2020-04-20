@@ -1,6 +1,5 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
-USE IEEE.numeric_std.ALL;
 USE work.ALL;
 
 ENTITY multi_counter_tester IS
