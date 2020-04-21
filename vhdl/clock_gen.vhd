@@ -16,10 +16,9 @@ ARCHITECTURE ClockDivider OF clock_gen IS
 
     -- Signals to be used:
     SIGNAL ClkDivCounter : std_logic_vector(31 DOWNTO 0) := (OTHERS => '0'); -- For clock divisons.
-    SIGNAL ClkDiv        : std_logic                     := '0';             -- Positive vs negat   ive period
+    SIGNAL ClkDiv        : std_logic                     := '0';             -- Positive vs negative period
 
 BEGIN
-
     ClockDivider : PROCESS (clk, reset)
         VARIABLE speedSelector : INTEGER;
     BEGIN
@@ -32,20 +31,27 @@ BEGIN
 
         -- reset on speed limit
         IF rising_edge(clk) THEN
-            IF (to_integer(unsigned(ClkDivCounter)) >= speedSelector) THEN --50MHz clock counting to sel. speed.
-                ClkDivCounter <= (OTHERS => '0');                              --Reset clock when limit is reached.
-                ClkDiv        <= '1';                                          --Set output hi
+            --50MHz clock counting to sel. speed.
+            IF (to_integer(unsigned(ClkDivCounter)) >= speedSelector) THEN
+                --Reset clock when limit is reached.
+                ClkDivCounter <= (OTHERS => '0');
+                ClkDiv        <= '1'; --Set output hi
             ELSE
-                ClkDivCounter <= std_logic_vector(unsigned(ClkDivCounter) + 1); --Increment - else keep counting
-                ClkDiv        <= '0';                                           -- with a low output
+                --Increment - else keep counting
+                ClkDivCounter <= std_logic_vector(unsigned(ClkDivCounter) + 1);
+                -- with a low output
+                ClkDiv        <= '0';
             END IF;
 
         END IF;
-        --hard reset -- 
+        --hard reset / reset is activated.  
         IF (reset = '0' OR ClkDiv = '1') THEN
-            ClkDivCounter <= (OTHERS => '0'); -- reset counter to 0..
-            ClkDiv        <= '0';             -- with a low output
+            -- reset counter to 0..
+            ClkDivCounter <= (OTHERS => '0');
+            -- with a low output 
+            ClkDiv        <= '0';
         END IF;
     END PROCESS;
-    clk_out <= ClkDiv; -- assign the clock to clock output.
+    -- assign the generated clock as main clock.
+    clk_out <= ClkDiv;
 END ARCHITECTURE ClockDivider;
