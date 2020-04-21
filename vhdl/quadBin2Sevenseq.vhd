@@ -4,10 +4,9 @@ USE IEEE.numeric_std.ALL;
 USE work.ALL;
 
 ENTITY quadBin2Sevenseq IS
-    PORT
-    (
+    PORT (
         -- inputs
-        bin    : IN std_logic_vector(15 DOWNTO 0);
+        bin : IN std_logic_vector(15 DOWNTO 0);
         -- outputs
         min_1  : OUT std_logic_vector(6 DOWNTO 0);
         min_10 : OUT std_logic_vector(6 DOWNTO 0);
@@ -24,33 +23,30 @@ BEGIN
     HexdisplayMinOnes : ENTITY bin2hex
         PORT MAP
         (
-            bin  => bin(3 DOWNTO 0),
-            sseg => min_1
+            bin => bin(3 DOWNTO 0),
+            seg => min_1
         );
     -- diplay tens
 
     HexdisplayMinTens : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin  => bin(7 DOWNTO 4),
-        sseg => min_10
+            bin => bin(7 DOWNTO 4),
+            seg => min_10
         );
     --- Hours
     -- display ones
     HexdisplayHoursOnes : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin  => bin(11 DOWNTO 8),
-        sseg => hrs_1
+            bin => bin(11 DOWNTO 8),
+            seg => hrs_1
         );
     -- diplay tens
     HexdisplayHoursTens : ENTITY bin2hex
-        PORT
-        MAP
+        PORT MAP
         (
-        bin  => bin(15 DOWNTO 12),
-        sseg => hrs_10
+            bin => bin(15 DOWNTO 12),
+            seg => hrs_10
         );
 END ARCHITECTURE rtl;

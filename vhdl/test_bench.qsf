@@ -470,16 +470,21 @@ set_location_assignment PIN_V24 -to GPIO_1[32]
 set_location_assignment PIN_V23 -to GPIO_1[33]
 set_location_assignment PIN_W25 -to GPIO_1[34]
 set_location_assignment PIN_W23 -to GPIO_1[35]
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
+
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name SIMULATION_MODE TIMING
-set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
-set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "C:/DSD/ex06_sequential_designs_watch_exercise/vhdl/funtionalWatchTiming.vwf"
-
+set_global_assignment -name VECTOR_WAVEFORM_FILE "ex6-1_functional_sim_3_mode_change.vwf"
+set_global_assignment -name VECTOR_WAVEFORM_FILE "ex6-1_functional_sim_2_reset.vwf"
+set_global_assignment -name VECTOR_WAVEFORM_FILE "ex6-1_functional_sim_1.vwf"
 set_global_assignment -name VHDL_FILE alarm_watch_tester.vhd
 set_global_assignment -name VHDL_FILE bin2hex.vhd
 set_global_assignment -name VHDL_FILE buzzing.vhd
@@ -497,3 +502,4 @@ set_global_assignment -name VHDL_FILE TwoCounters.vhd
 set_global_assignment -name VHDL_FILE watch_tester.vhd
 set_global_assignment -name VHDL_FILE watch.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE funtionalWatchTiming.vwf
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "C:/au_exercises/dsd/assignments_g37/dsd_journal_03/ex06/vhdl/ex6-1_functional_sim_3_mode_change.vwf"

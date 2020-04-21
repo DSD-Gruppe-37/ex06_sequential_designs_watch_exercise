@@ -7,7 +7,7 @@ ENTITY multi_counter_tester IS
         SW   : IN std_logic_vector(17 DOWNTO 16);
         KEY  : IN std_logic_vector(3 DOWNTO 0);
         HEX0 : OUT std_logic_vector(6 DOWNTO 0);
-        LEDR : OUT std_logic_vector(3 DOWNTO 0)
+        LEDR : OUT std_logic_vector(0 DOWNTO 0)
     );
 END ENTITY multi_counter_tester;
 
@@ -23,7 +23,7 @@ BEGIN
             count => countOut,
             cout  => LEDR(0)
         );
-    uut1 : ENTITY bin2sevenseg
+    uut1 : ENTITY bin2hex
         PORT MAP
         (
             bin => countOut,
