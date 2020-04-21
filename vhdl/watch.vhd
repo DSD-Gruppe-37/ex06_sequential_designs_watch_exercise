@@ -29,11 +29,7 @@ ARCHITECTURE rtl OF watch IS
     SIGNAL ClkOut_internal : std_logic;
 BEGIN
 
-<<<<<<< HEAD
-    --- Main clock:
-=======
     -- Main clock generator:
->>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
     ClockGenerator : ENTITY clock_gen
         PORT MAP
         (
@@ -43,23 +39,19 @@ BEGIN
             clk_Out => ClkOut_internal
         );
 
-<<<<<<< HEAD
-    --- Seconds counter
-=======
     -- Seconds counters
->>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
     DualSecCounter : ENTITY TwoCounters
         PORT MAP
         (
-        clkIn      => ClkOut_internal,
-        resetIn    => ResetSignal,
-        modeOnes   => "00",
-        modeTens   => "01",
-        coutOut    => secCarry,
-        segOnesOut => sec_1,
-        segTensOut => sec_10,
-        countOnes  => OPEN,
-        countTens  => OPEN
+            clkIn      => ClkOut_internal,
+            resetIn    => ResetSignal,
+            modeOnes   => "00",
+            modeTens   => "01",
+            coutOut    => secCarry,
+            segOnesOut => sec_1,
+            segTensOut => sec_10,
+            countOnes  => OPEN,
+            countTens  => OPEN
         );
 
     --- Minutes counter

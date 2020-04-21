@@ -1,20 +1,15 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> d6e6a630536b92128e2274364bc6eb0a4ec06fdf
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
 ENTITY buzzing IS
-    PORT
-    (
+    PORT (
         -- input
         tm_watch : IN std_logic_vector(15 DOWNTO 0);
         tm_alarm : IN std_logic_vector(15 DOWNTO 0);
         clk      : IN std_logic;
         -- output
-        buzzer   : OUT std_logic
+        buzzer : OUT std_logic
     );
 END ENTITY buzzing;
 ARCHITECTURE rtl OF buzzing IS
@@ -35,7 +30,7 @@ BEGIN
                 ELSE
                     BuzzFreqCount <= std_logic_vector(unsigned(BuzzFreqCount) + 1); --Increment - else keep counting
                     -- BuzzCount     <= std_logic_vector(unsigned(BuzzCount) + 1);     --Increment - else keep counting
-                    BuzzOut       <= '0';                                           -- with a low output
+                    BuzzOut <= '0'; -- with a low output
                 END IF;
             END IF;
         ELSE
